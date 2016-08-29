@@ -67,7 +67,7 @@ print(df3)
 * Null Hypothesis: The chicks' weights are not dependent on the feed.
 * Alternative Hypothesisi: The chicks' weights are dependent on the feed.
 
-```{r data_import, echo=TRUE}
+```{r echo=TRUE}
 chw <- read.csv('chick-weights (1).csv')
 chw
 
