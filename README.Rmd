@@ -56,6 +56,97 @@ library(tidyr)
 df1<-gather(analgesicdf, key = One, value = Two, Measurement_1, Measurement_2, Measurement_3)
 df2<-group_by(df1, ID, Group)
 df3<-summarise(df2, mean(Two))
+print(df1)
+print(df2)
+print(df3)
+```
+
+#Assignment 5
+##Chicken weights
+
+* Null Hypothesis: The chicks' weights are not dependent on the feed.
+* Alternative Hypothesisi: The chicks' weights are dependent on the feed.
+
+```{r data_import, echo=TRUE}
+chw <- read.csv('chick-weights (1).csv')
+chw
+
+#boxplot
+plot(chw$feed, chw$weight)
+
+#One-way anova
+chw1 <- aov(chw$weight ~ chw$feed, data = chw)
+summary(chw1)
+
+
+
 
 ```
+* Test Assumptions- there are more than 2 groups and the data is parametric.
+
+* df=5
+* p value =5.94e-10
+* we reject the null hypothesis. The chicks' weights are dependent on the type of feed. 
+
+***
+
+##The Hot Zone
+
+* Null Hypothesis-The gastroenteritis is not caused by drinking contaminated water.
+* Alternative Hypothesis- Gatroenteritis is caused by drinking contaminated water.
+
+```{r echo=TRUE}
+gast<- read.csv('gastroenteritis (2).CSV')
+gast
+
+#cross tabulating
+gast1 <- table(gast$Consumption, gast$Outcome)
+gast2 <- xtabs(~Consumption + Outcome, data =gast)
+
+#barplot
+gast3 <- barplot(gast2, beside = TRUE)
+
+#chi squared test
+gast4 <- chisq.test(gast2, correct = TRUE)
+gast4
+
+
+
+
+
+```
+* Test Assumptions- There was random sampling, the observations are independent and the sample is large.
+
+* x-squared=0.23
+* df=2
+* p-value=2.2e-16
+* We reject the null hypothesis. There is a correlation between drinking contaminated water and falling ill. 
+
+***
+
+##Nausea
+
+* Null Hypothesis-The chemotherapy does not cause nausea.
+* Alternative Hypothesis- Chemotherapy causes nausea.
+
+```{r echo=TRUE}
+naus <- read.csv('nausea (1).csv')
+naus
+
+#line graph
+plot(naus$Nausea_before~ naus$Patient, type = 'l',  col = 'blue', ylim = c(0,6))
+lines(naus$Nausea_after~ naus$Patient, col = 'red')
+legend("top", c('Nausea Before', 'Nausea after'), fill = c('blue', 'red'))
+
+#wilcox
+wilcox.test(naus$Nausea_before, naus$Nausea_after, data = naus)
+
+```
+*Test Assumptions- We are comparing 2 groups and the data is ordinal.
+
+* W=52.5
+* p-value=0.034
+* We reject the null hypothesis. Chemotherapy does cause nausea. 
+
+
 
