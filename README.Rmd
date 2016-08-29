@@ -3,7 +3,7 @@ author: "Sihle"
 title: "Assignments"
 output: github_document
 ---
-#Assignment 1
+#Assignment 2
 
 ```{r quick_loo, echo=TRUE}
 data("anscombe")
@@ -27,12 +27,35 @@ abline(lm(y1~x1, data=anscombe), lwd=2, col = 'grey')
 
 ```
 
-## Including Plots
+#Assignment 4
+##Chunk 1
 
-You can also embed plots, for example:
+```{r  data_import, echo=TRUE}
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+analgesicdf <- read.csv('analgesic.csv')
+analgesicdf
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+##Chunk 2
+```{r data_summary, echo=TRUE}
+analgesicdf
+dim(analgesicdf)
+names(analgesicdf)
+head(analgesicdf)
+tail(analgesicdf)
+summary(analgesicdf)
+
+```
+
+##Chunk 3
+```{r data_tidy, echo=TRUE}
+library(dplyr)
+library(tidyr)
+
+df1<-gather(analgesicdf, key = One, value = Two, Measurement_1, Measurement_2, Measurement_3)
+df2<-group_by(df1, ID, Group)
+df3<-summarise(df2, mean(Two))
+
+```
+
