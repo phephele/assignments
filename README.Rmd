@@ -15,16 +15,16 @@ summary(anscombe)
 
 ```
 
-## GitHub Documents
+#Assignment 3
 
-This is an R Markdown format used for publishing markdown documents to GitHub. When you click the **Knit** button all R code chunks are run and a markdown file (.md) suitable for publishing to GitHub is generated.
 
-## Including Code
+```{r xy_plot, echo=FALSE, fig.height=8, fig.width=8, fig.align='center', fig.ext='svg', fig.path='./figures/'}
 
-You can include R code in the document as follows:
+data("anscombe")
+plot(anscombe$x1, anscombe$y1, xlab = 'x1', ylab = 'y1', pch = 22, col = 'green')
+abline(lm(y1~x1, data=anscombe), lwd=2, col = 'grey')
 
-```{r cars}
-summary(cars)
+
 ```
 
 ## Including Plots
